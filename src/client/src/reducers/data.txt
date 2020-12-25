@@ -1,0 +1,17 @@
+{
+    id:"123",
+    name:"Alexander",
+    color:"black and white",
+    sex: "male",
+    breed:"tabby",
+    species: "feline",
+    imageURL: "https://s3-us-west-2.amazonaws.com/terraform-in-action/cat-0.jpg"
+},{
+id:"123123412",
+name:"Pike",
+color:"black and white",
+sex: "male",
+breed:"tabby",
+species: "feline",
+imageURL: "https://s3-us-west-2.amazonaws.com/terraform-in-action/cat-1.jpg"
+}
