@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"os"
@@ -68,8 +69,9 @@ func optionsPetHandler(c *gin.Context) {
 }
 
 //Handler is the entry function that gets called by AWS Lambda
-func Handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	return ginLambda.Proxy(req)
+func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	// If no name is provided in the HTTP request body, throw an error
+	return ginLambda.ProxyWithContext(ctx, req)
 }
 
 func main() {
