@@ -12,7 +12,7 @@ resource "aws_rds_cluster" "rds_cluster" {
   preferred_backup_window = "04:00-07:00"
   engine_mode             = "serverless"
   scaling_configuration {
-    max_capacity             = 1
-    min_capacity             = 1
+    max_capacity             = 2
+    min_capacity             = 2
   }
 }

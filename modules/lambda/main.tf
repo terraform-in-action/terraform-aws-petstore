@@ -65,6 +65,7 @@ resource "aws_lambda_function" "lambda_function" {
   memory_size   = 256
   runtime       = "go1.x"
   timeout       = 60
+  reserved_concurrent_executions = 1
 
   environment {
     variables = {
