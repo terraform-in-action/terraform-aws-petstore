@@ -2,7 +2,7 @@ data "aws_region" "current" {}
 
 resource "aws_rds_cluster" "rds_cluster" {
   cluster_identifier      = "${var.namespace}-aurora-cluster"
-  engine                  = "aurora"
+  engine                  = "aurora-mysql"
   availability_zones      = ["${data.aws_region.current.name}a","${data.aws_region.current.name}b","${data.aws_region.current.name}c"]
   database_name           = "petstore"
   master_username         = var.rds_user
