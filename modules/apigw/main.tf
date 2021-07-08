@@ -11,7 +11,7 @@ resource "aws_api_gateway_rest_api" "api" {
 
 #apigw role
 resource "aws_api_gateway_account" "apigw_account" {
-  depends_on = [aws_iam_role_policy.cloudwatch]
+  depends_on          = [aws_iam_role_policy.cloudwatch]
   cloudwatch_role_arn = aws_iam_role.cloudwatch.arn
 }
 
@@ -80,20 +80,20 @@ resource "aws_api_gateway_method" "redirect_method" {
 resource "aws_api_gateway_integration" "redirect_integration" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   resource_id = aws_api_gateway_rest_api.api.root_resource_id
-  http_method = aws_api_gateway_method.redirect_method.http_method 
-  type = "MOCK"
+  http_method = aws_api_gateway_method.redirect_method.http_method
+  type        = "MOCK"
   request_templates = { "application/json" = <<-EOF
   {
     "statusCode" : 302
   }
 EOF
-}
+  }
 }
 
 resource "aws_api_gateway_method_response" "redirect" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   resource_id = aws_api_gateway_rest_api.api.root_resource_id
-  http_method = aws_api_gateway_method.redirect_method.http_method 
+  http_method = aws_api_gateway_method.redirect_method.http_method
 
   response_parameters = {
     "method.response.header.Location" = true
@@ -105,8 +105,8 @@ resource "aws_api_gateway_method_response" "redirect" {
 resource "aws_api_gateway_integration_response" "redirect_integration_response" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   resource_id = aws_api_gateway_rest_api.api.root_resource_id
-  http_method = aws_api_gateway_method.redirect_method.http_method 
-  status_code = aws_api_gateway_method_response.redirect.status_code 
+  http_method = aws_api_gateway_method.redirect_method.http_method
+  status_code = aws_api_gateway_method_response.redirect.status_code
 
   response_parameters = {
     "method.response.header.Location" = "'/v1/ui'"

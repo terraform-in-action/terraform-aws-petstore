@@ -58,13 +58,13 @@ resource "aws_default_subnet" "default_az3" {
 
 #lambda function
 resource "aws_lambda_function" "lambda_function" {
-  filename      = "${path.module}/../../dist/function.zip"
-  function_name = "${var.namespace}-lambda"
-  handler       = "deployment"
-  role          = aws_iam_role.lambda_role.arn
-  memory_size   = 256
-  runtime       = "go1.x"
-  timeout       = 60
+  filename                       = "${path.module}/../../dist/function.zip"
+  function_name                  = "${var.namespace}-lambda"
+  handler                        = "deployment"
+  role                           = aws_iam_role.lambda_role.arn
+  memory_size                    = 256
+  runtime                        = "go1.x"
+  timeout                        = 60
   reserved_concurrent_executions = 1
 
   environment {
@@ -78,7 +78,7 @@ resource "aws_lambda_function" "lambda_function" {
   }
 
   vpc_config {
-    subnet_ids = [aws_default_subnet.default_az1.id,aws_default_subnet.default_az2.id,aws_default_subnet.default_az3.id]
+    subnet_ids         = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id, aws_default_subnet.default_az3.id]
     security_group_ids = [var.sg.lambda]
   }
 }

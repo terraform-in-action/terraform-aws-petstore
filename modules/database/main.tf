@@ -3,7 +3,7 @@ data "aws_region" "current" {}
 resource "aws_rds_cluster" "rds_cluster" {
   cluster_identifier      = "${var.namespace}-aurora-cluster"
   engine                  = "aurora-mysql"
-  availability_zones      = ["${data.aws_region.current.name}a","${data.aws_region.current.name}b","${data.aws_region.current.name}c"]
+  availability_zones      = ["${data.aws_region.current.name}a", "${data.aws_region.current.name}b", "${data.aws_region.current.name}c"]
   database_name           = "petstore"
   master_username         = var.rds_user
   master_password         = var.rds_password
@@ -12,7 +12,8 @@ resource "aws_rds_cluster" "rds_cluster" {
   preferred_backup_window = "04:00-07:00"
   engine_mode             = "serverless"
   scaling_configuration {
-    max_capacity             = 2
-    min_capacity             = 2
+    max_capacity = 2
+    min_capacity = 2
   }
+  vpc_security_group_ids = [var.sg.db]
 }

@@ -1,3 +1,3 @@
 output "address" {
-    value = module.apigw.invoke_url
+  value = module.apigw.invoke_url
 }
